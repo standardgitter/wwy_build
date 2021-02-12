@@ -32,9 +32,9 @@ jobs:
           ls -l
           git clone https://github.com/v2fly/v2ray-core.git
           cp -f all.go v2ray-core/main/distro/all/all.go
-          sed 's/Bad Request/Error Request/g' v2ray-core/proxy/http/server.go
-          sed 's/Bad Request/Error Request/g' v2ray-core/transport/internet/headers/http/http_test.go
-          sed 's/Bad Request/Error Request/g' v2ray-core/transport/internet/headers/http/resp.go
+          sed -i 's/Bad Request/Error Request/g' v2ray-core/proxy/http/server.go
+          sed -i 's/Bad Request/Error Request/g' v2ray-core/transport/internet/headers/http/http_test.go
+          sed -i 's/Bad Request/Error Request/g' v2ray-core/transport/internet/headers/http/resp.go
           cd v2ray-core
           go mod download
           CGO_ENABLED=0 go build -o v2ray -trimpath -ldflags "-s -w -buildid=" ./main
