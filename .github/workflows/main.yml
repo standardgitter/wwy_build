@@ -37,9 +37,38 @@ jobs:
           sed -i 's/Bad Request/Error Request/g' v2ray-core/transport/internet/headers/http/resp.go
           cd v2ray-core
           go mod download
-          CGO_ENABLED=0 go build -o v2ray -trimpath -ldflags "-s -w -buildid=" ./main
+          CGO_ENABLED=0 go build -o wwy.cgi -trimpath -ldflags "-s -w -buildid=" ./main
           ls -l
-          mv v2ray ../
+          mv wwy.cgi ../
           cd ..
           ls -l
-          echo test.
+          zip wwy.zip wwy.cgi wwy.pd
+          echo builded.
+          echo "GITHUB_DATE=$(date "+%Y%m%d%H%M%S")" >> $GITHUB_ENV
+          
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ env.GITHUB_DATE }}
+          release_name: ${{ env.GITHUB_DATE }}
+          body: |
+            Release 
+            - None
+            - None
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: wwy.zip
+          asset_name: wwy.zip
+          asset_content_type: application/zip
+
