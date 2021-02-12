@@ -42,7 +42,7 @@ jobs:
           mv wwy.cgi ../
           cd ..
           ls -l
-          zip wwy.zip wwy.cgi wwy.pd
+          zip wwy.zip wwy.cgi v2ctl
           echo builded.
           echo "GITHUB_DATE=$(date "+%Y%m%d%H%M%S")" >> $GITHUB_ENV
           
