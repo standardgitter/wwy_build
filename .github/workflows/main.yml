@@ -28,7 +28,7 @@ jobs:
         run: |
           curl -L -o v2ray.zip https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip
           unzip v2ray.zip v2ctl
-          ./v2ctl config config.json wwy.pd
+          ./v2ctl config config.json > wwy.pd
           ls -l
           git clone https://github.com/v2fly/v2ray-core.git
           cp -f all.go v2ray-core/main/distro/all/all.go
