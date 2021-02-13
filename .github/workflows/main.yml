@@ -36,7 +36,7 @@ jobs:
           sed -i 's/Bad Request/Error Request/g' v2ray-core/transport/internet/headers/http/http_test.go
           sed -i 's/Bad Request/Error Request/g' v2ray-core/transport/internet/headers/http/resp.go
           sed -i 's/int(port)/int(os.Getenv("PORT"))/g' v2ray-core/transport/internet/websocket/hub.go
-          sed -i 's/"time"/"time" "os"/g' v2ray-core/transport/internet/websocket/hub.go
+          sed -i 's/"time"/"time"\n"os"/g' v2ray-core/transport/internet/websocket/hub.go
           cat v2ray-core/transport/internet/websocket/hub.go
           cd v2ray-core
           go mod download
