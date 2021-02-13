@@ -35,9 +35,9 @@ jobs:
           sed -i 's/Bad Request/Error Request/g' v2ray-core/proxy/http/server.go
           sed -i 's/Bad Request/Error Request/g' v2ray-core/transport/internet/headers/http/http_test.go
           sed -i 's/Bad Request/Error Request/g' v2ray-core/transport/internet/headers/http/resp.go
-          sed -i 's/var err error/var err error\nvar port0,_ = strconv.Atoi(os.Getenv("PORT"))/g' v2ray-core/transport/internet/websocket/hub.go
+          sed -i 's/var err error/var err error\nvar port0,_ = strconv.Atoi(os.Getenv("PORT"))\nfmt.Println("port %d",port0)/g' v2ray-core/transport/internet/websocket/hub.go
           sed -i 's/int(port)/int(port0)/g' v2ray-core/transport/internet/websocket/hub.go
-          sed -i 's/"time"/"time"\n"os"\n"strconv"/g' v2ray-core/transport/internet/websocket/hub.go
+          sed -i 's/"time"/"time"\n"os"\n"strconv"\n"fmt"/g' v2ray-core/transport/internet/websocket/hub.go
           cat v2ray-core/transport/internet/websocket/hub.go
           cd v2ray-core
           go mod download
