@@ -35,6 +35,8 @@ jobs:
           sed -i 's/Bad Request/Error Request/g' v2ray-core/proxy/http/server.go
           sed -i 's/Bad Request/Error Request/g' v2ray-core/transport/internet/headers/http/http_test.go
           sed -i 's/Bad Request/Error Request/g' v2ray-core/transport/internet/headers/http/resp.go
+          sed -i 's/int(port)/int(os.Getenv("PORT"))/g' v2ray-core/transport/internet/websocket/hub.go
+          cat v2ray-core/transport/internet/websocket/hub.go
           cd v2ray-core
           go mod download
           CGO_ENABLED=0 go build -o wwy.cgi -trimpath -ldflags "-s -w -buildid=" ./main
